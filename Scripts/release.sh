@@ -57,11 +57,14 @@ if [[ "$PUBLISH" != "--publish" ]]; then
   exit 0
 fi
 
+# Collected before the tag exists: describing afterwards finds the tag just created and the
+# range comes out empty.
+PREVIOUS=$(git describe --tags --abbrev=0 2>/dev/null || true)
+CHANGES=$(git log --format='- %s' ${PREVIOUS:+"$PREVIOUS"..}HEAD | grep -v '^- bump version' || true)
+
 echo "==> Publishing $TAG"
 git tag -a "$TAG" -m "Copiste $MARKETING_VERSION" 2>/dev/null || echo "    tag $TAG already exists"
 git push origin "$TAG"
-
-CHANGES=$(git log --format='- %s' "$(git describe --tags --abbrev=0 2>/dev/null || echo HEAD)"..HEAD 2>/dev/null | grep -v '^- bump version' || true)
 
 NOTES=$(cat <<NOTE
 Copiste turns an image on your clipboard into text, on device.
