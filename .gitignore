@@ -1,0 +1,7 @@
+.build/
+.swiftpm/
+Copiste.app/
+Icon.icns
+*.xcuserdatad
+.DS_Store
+Artwork/appicon-square.png

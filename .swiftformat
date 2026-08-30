@@ -1,0 +1,39 @@
+# SwiftFormat configuration for Copiste.
+
+# Explicit self is required in places for Swift 6 concurrency; keep it everywhere.
+--self insert
+--importgrouping testable-bottom
+--extensionacl on-declarations
+
+# Indentation
+--indent 4
+--indentcase false
+--ifdef no-indent
+--xcodeindentation enabled
+
+# Line breaks
+--linebreaks lf
+--maxwidth 120
+
+# Whitespace
+--trimwhitespace always
+--emptybraces no-space
+--nospaceoperators ...,..<
+--ranges no-space
+--someAny true
+
+# Wrapping
+--wraparguments before-first
+--wrapparameters before-first
+--wrapcollections before-first
+--closingparen same-line
+
+--swiftversion 6.2
+--stripunusedargs closure-only
+--header ignore
+--allman false
+
+--exclude .build,.swiftpm
+
+# SwiftFormat owns brace placement and test naming; SwiftLint must not fight it.
+--disable swiftTestingTestCaseNames

@@ -1,0 +1,41 @@
+included:
+  - Sources
+  - Tests
+excluded:
+  - .build
+  - .swiftpm
+
+disabled_rules:
+  - todo
+  - trailing_comma
+  # SwiftFormat's before-first wrapping puts the brace on its own line.
+  - opening_brace
+
+opt_in_rules:
+  - empty_count
+  - explicit_init
+  - first_where
+  - last_where
+  - redundant_nil_coalescing
+
+analyzer_rules:
+  - unused_import
+
+line_length:
+  warning: 120
+  error: 160
+
+file_length:
+  warning: 400
+
+type_body_length:
+  warning: 250
+
+function_body_length:
+  warning: 60
+
+identifier_name:
+  min_length: 1
+
+force_cast: warning
+force_try: warning
