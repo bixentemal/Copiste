@@ -61,6 +61,8 @@ echo "==> Publishing $TAG"
 git tag -a "$TAG" -m "Copiste $MARKETING_VERSION" 2>/dev/null || echo "    tag $TAG already exists"
 git push origin "$TAG"
 
+CHANGES=$(git log --format='- %s' "$(git describe --tags --abbrev=0 2>/dev/null || echo HEAD)"..HEAD 2>/dev/null | grep -v '^- bump version' || true)
+
 NOTES=$(cat <<NOTE
 Copiste turns an image on your clipboard into text, on device.
 
@@ -81,6 +83,10 @@ Indentation, reading order, and paragraph breaks are reconstructed from the reco
 3. Open it. The icon appears in the menu bar.
 4. Press \`⌥⌘O\` once and grant **Accessibility** permission when macOS asks — pasting means sending a keystroke to another app. \`⌥⌘⇧O\` needs no permission at all.
 
+${CHANGES:+## Changes
+
+$CHANGES
+}
 Requires macOS 15 or later.
 
 \`\`\`
