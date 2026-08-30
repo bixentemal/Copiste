@@ -23,6 +23,8 @@ struct MenuContent: View {
 
         Divider()
 
+        Button("About Copiste") { AboutPanel.show() }
+
         Button("Settings…") {
             NotificationCenter.default.post(name: .copisteOpenSettings, object: nil)
         }

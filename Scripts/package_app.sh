@@ -5,6 +5,7 @@ CONF=${1:-debug}
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
 source "$ROOT/version.env"
+COPYRIGHT_YEAR=$(date +%Y)
 
 swift build -c "$CONF"
 
@@ -33,7 +34,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>LSMultipleInstancesProhibited</key><true/>
     <key>LSUIElement</key><true/>
-    <key>NSHumanReadableCopyright</key><string>2026 Vincent Malet. MIT License.</string>
+    <key>NSHumanReadableCopyright</key><string>© ${COPYRIGHT_YEAR} Vincent Malet. MIT License.</string>
 </dict>
 </plist>
 PLIST

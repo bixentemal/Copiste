@@ -23,26 +23,17 @@ struct SettingsOpener: View {
     var body: some View {
         EmptyView()
             .onReceive(NotificationCenter.default.publisher(for: .copisteOpenSettings)) { _ in
-                self.openSettings()
-                NSApp.activate()
-                self.raiseSettingsWindow()
-            }
-    }
-
-    /// SwiftUI creates the window asynchronously, so it may not exist yet when the action
-    /// returns. Poll briefly rather than guess at a delay.
-    private func raiseSettingsWindow() {
-        Task { @MainActor in
-            for _ in 0..<20 {
+                // Reopening an already-open Settings window creates no new window, so raise
+                // any existing one too.
                 if let window = NSApp.windows.first(where: {
                     $0.identifier?.rawValue.contains("Settings") == true
                 }) {
+                    WindowRaiser.activate()
                     window.makeKeyAndOrderFront(nil)
                     window.orderFrontRegardless()
                     return
                 }
-                try? await Task.sleep(for: .milliseconds(25))
+                WindowRaiser.present { self.openSettings() }
             }
-        }
     }
 }
