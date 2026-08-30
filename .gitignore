@@ -5,3 +5,4 @@ Icon.icns
 *.xcuserdatad
 .DS_Store
 Artwork/appicon-square.png
+dist/

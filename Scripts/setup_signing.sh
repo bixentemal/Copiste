@@ -67,6 +67,10 @@ The first build after this change has a new identity, so grant Accessibility onc
   tccutil reset Accessibility com.bixentemal.copiste
   tccutil reset Accessibility com.bixentemal.copiste.debug
 
+Back this identity up if you publish releases — losing it means future releases have a
+different identity, and every user has to grant Accessibility again:
+  security export -k $KEYCHAIN_NAME -t identities -f pkcs12 -o copiste-identity.p12
+
 To undo everything:
   security delete-keychain $KEYCHAIN_NAME
   rm -f $PASSWORD_FILE

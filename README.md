@@ -38,8 +38,24 @@ Mac, there is no API key, and it works offline.
 
 ## Install
 
-There is no download yet, so build it from source. You need macOS 15 or later and Swift 6.2
-(install Xcode, or the Swift toolchain).
+Download the latest `Copiste-<version>.zip` from
+[Releases](https://github.com/bixentemal/Copiste/releases/latest), unzip it, and move
+`Copiste.app` to `/Applications`.
+
+The build is **not notarized** — that needs a paid Apple Developer ID, which this project
+does not have — so macOS quarantines it and reports it as damaged until you clear the flag
+yourself. Install it only if you are comfortable with that:
+
+```sh
+xattr -dr com.apple.quarantine /Applications/Copiste.app
+```
+
+Open it; the icon appears in the menu bar. Then press `⌥⌘O` once and grant Accessibility
+permission when macOS asks (see below). Requires macOS 15 or later.
+
+### Build from source instead
+
+You need macOS 15 or later and Swift 6.2 (install Xcode, or the Swift toolchain).
 
 ```sh
 git clone <this repo> && cd copiste
@@ -94,14 +110,11 @@ comes back. It affects nothing else. Debug and release builds have different bun
 reset whichever one you are running; resetting an id you have never granted is harmless and
 reports "No such bundle identifier".
 
-### Downloaded builds
+### Updating
 
-If you ever install a build you did not compile yourself, macOS quarantines it because it is
-not notarized, and reports it as damaged. Clear the flag before opening it:
-
-```sh
-xattr -dr com.apple.quarantine /Applications/Copiste.app
-```
+Releases are signed with the same certificate, so macOS treats an update as the same app and
+your Accessibility permission carries over. (An ad-hoc signed build would not: its identity
+is the code hash, so every update would ask again.)
 
 ## What it accepts
 
@@ -121,6 +134,8 @@ swift test                         # 35 tests
 ./Scripts/package_app.sh release   # Copiste.app, ad-hoc signed
 ./Scripts/make_icons.sh            # regenerate icons from Artwork/copiste-logo.png
 ./Scripts/setup_signing.sh         # once: stable signing identity (see above)
+./Scripts/release.sh               # build + verify a release artifact
+./Scripts/release.sh --publish     # ...and publish it to GitHub
 swiftformat . && swiftlint lint
 ```
 
