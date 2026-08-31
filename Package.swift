@@ -8,7 +8,8 @@ let package = Package(
         .macOS(.v15),
     ],
     dependencies: [
-        .package(url: "https://github.com/sindresorhus/KeyboardShortcuts", from: "2.4.0"),
+        // Vendored, not fetched: see Vendor/KeyboardShortcuts/Package.swift for why.
+        .package(path: "Vendor/KeyboardShortcuts"),
     ],
     targets: [
         .target(
