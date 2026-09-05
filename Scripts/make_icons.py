@@ -2,6 +2,9 @@ import struct, zlib, math
 from pathlib import Path
 
 SRC = "Artwork/copiste-logo.png"
+# The menu bar renders at 18pt, too small for the logo's inner cuts to survive, so the
+# glyphs come from a simplified mark instead.
+MARK = "Artwork/copiste-mark.png"
 
 def read_png(path):
     data = Path(path).read_bytes()
@@ -47,7 +50,7 @@ def write_png(path, w, h, rgba):
            + chunk(b"IEND", b""))
     Path(path).write_bytes(png)
 
-w, h, ch, px = read_png(SRC)
+w, h, ch, px = read_png(MARK)
 
 # Glyph is light on a near-black ground: luminance becomes the template's alpha.
 LO, HI = 40.0, 225.0
@@ -105,6 +108,7 @@ for name, slash in (("MenuIcon", False), ("MenuIconOff", True)):
 
 # Full-colour app icon: pad the artwork to a square on its own background colour, for
 # Scripts/make_icons.sh to turn into Icon.icns.
+w, h, ch, px = read_png(SRC)
 bg = (px[0], px[1], px[2], 255)
 s = max(w, h)
 canvas = bytearray()
