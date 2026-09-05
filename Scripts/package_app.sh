@@ -7,6 +7,7 @@ cd "$ROOT"
 source "$ROOT/version.env"
 COPYRIGHT_YEAR=$(date +%Y)
 
+"$ROOT/Scripts/make_icons.sh"
 swift build -c "$CONF"
 
 APP="$ROOT/Copiste.app"
@@ -55,9 +56,6 @@ for bundle in "${bundles[@]}"; do
   cp -R "$bundle" "$APP/Contents/Resources/"
 done
 
-if [[ ! -f "$ROOT/Icon.icns" ]]; then
-  "$ROOT/Scripts/make_icons.sh"
-fi
 cp "$ROOT/Icon.icns" "$APP/Contents/Resources/Icon.icns"
 
 # AppleDouble files break code sealing.

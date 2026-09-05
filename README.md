@@ -1,5 +1,7 @@
 # Copiste
 
+<img src="Artwork/copiste-logo.png" alt="Copiste feather logo" width="160">
+
 Turn an image on your clipboard into text, on demand, entirely on device.
 
 Copy a screenshot of a command, a code block from a video call, or a page of a book, then:
@@ -132,7 +134,7 @@ swift build                        # dev build
 swift test                         # 35 tests
 ./Scripts/compile_and_run.sh       # kill, build, test, package, relaunch
 ./Scripts/package_app.sh release   # Copiste.app, ad-hoc signed
-./Scripts/make_icons.sh            # regenerate icons from Artwork/copiste-logo.png
+./Scripts/make_icons.sh            # regenerate icons from Artwork/copiste-{logo,mark}.png
 ./Scripts/setup_signing.sh         # once: stable signing identity (see above)
 ./Scripts/release.sh               # build + verify a release artifact
 ./Scripts/release.sh --publish     # ...and publish it to GitHub

@@ -453,19 +453,20 @@ settings.
 
 ## 7. Icon
 
-The supplied artwork is 164×166 with alpha: a light glyph on a near-black rounded ground.
+The artwork has two 1024×1024 sources: a full feather logo and a simplified menu-bar mark,
+both drawn as light glyphs on a near-black ground.
 macOS menu-bar icons must be **template images** — the glyph in solid black with alpha,
 fully transparent background, `isTemplate = true` — so the system recolours them for light
 and dark menu bars.
 
 Two derivations are needed:
 
-- `MenuIcon.png` (18×18) + `@2x` (36×36) — glyph only, transparent, template. Plus a
-  slashed `MenuIconOff` variant for the failure flash.
-- `Icon.icns` — full artwork including the dark ground, for the bundle and About.
+- `MenuIcon.png` (18×18) + `@2x` (36×36) — the simplified mark as a transparent template.
+  Plus a slashed `MenuIconOff` variant for the failure flash.
+- `Icon.icns` — the full feather artwork including the dark ground, for the bundle and About.
 
-Produced with `sips`. If flattening to solid black loses the droplet's interior detail, an
-SVG or transparent master is requested instead.
+`Scripts/make_icons.sh` derives the menu resources from `Artwork/copiste-mark.png` and uses
+`sips` to build the app-icon representations from `Artwork/copiste-logo.png`.
 
 Resources are loaded through a small `Bundle` lookup helper with fallbacks (main bundle
 Resources → SwiftPM `Copiste_Copiste.bundle` → dev path), avoiding the `Bundle.module` trap
@@ -522,11 +523,8 @@ Documented in the README.
 
 ## 9. Open items
 
-1. **Icon resolution.** `Icon.icns` is upscaled from a 164×166 source, so the 512 and 1024
-   representations are soft. A vector or high-resolution master would fix it. The menu-bar
-   glyph is unaffected — it renders at 18×18 and 36×36, well inside the source resolution.
-2. **Version control.** The repository is not under git yet; no commits have been made.
-3. **Distribution.** No release workflow exists. Building from source is the only route.
+1. **Version control.** The repository is not under git yet; no commits have been made.
+2. **Distribution.** No release workflow exists. Building from source is the only route.
 
 ---
 

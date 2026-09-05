@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Regenerate the menu-bar template glyphs and the app icon from Artwork/copiste-logo.png.
+# Regenerate icons from the full logo and the simplified menu-bar mark in Artwork/.
 set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
