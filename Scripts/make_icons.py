@@ -92,8 +92,8 @@ def resample(size, slash=False):
                     acc += square(ox+sx, oy+sy); n += 1
             a = acc/n if n else 0.0
             if slash:
-                # Anti-diagonal stroke, lower-left to upper-right, as SF Symbols draw it.
-                d = abs(dx+dy-(size-1))/math.sqrt(2)
+                # Cross the feather's shaft from top-left to bottom-right.
+                d = abs(dx-dy)/math.sqrt(2)
                 gap, stroke = size*0.085, size*0.040
                 if d < stroke: a = 1.0
                 elif d < gap: a = 0.0
