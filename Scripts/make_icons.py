@@ -2,6 +2,9 @@ import struct, zlib, math
 from pathlib import Path
 
 SRC = "Artwork/copiste-logo.png"
+# The menu bar renders at 18pt, too small for the logo's inner cuts to survive, so the
+# glyphs come from a simplified mark instead.
+MARK = "Artwork/copiste-mark.png"
 
 def read_png(path):
     data = Path(path).read_bytes()
@@ -47,7 +50,7 @@ def write_png(path, w, h, rgba):
            + chunk(b"IEND", b""))
     Path(path).write_bytes(png)
 
-w, h, ch, px = read_png(SRC)
+w, h, ch, px = read_png(MARK)
 
 # Glyph is light on a near-black ground: luminance becomes the template's alpha.
 LO, HI = 40.0, 225.0
@@ -89,8 +92,8 @@ def resample(size, slash=False):
                     acc += square(ox+sx, oy+sy); n += 1
             a = acc/n if n else 0.0
             if slash:
-                # Anti-diagonal stroke, lower-left to upper-right, as SF Symbols draw it.
-                d = abs(dx+dy-(size-1))/math.sqrt(2)
+                # Cross the feather's shaft from top-left to bottom-right.
+                d = abs(dx-dy)/math.sqrt(2)
                 gap, stroke = size*0.085, size*0.040
                 if d < stroke: a = 1.0
                 elif d < gap: a = 0.0
@@ -105,6 +108,7 @@ for name, slash in (("MenuIcon", False), ("MenuIconOff", True)):
 
 # Full-colour app icon: pad the artwork to a square on its own background colour, for
 # Scripts/make_icons.sh to turn into Icon.icns.
+w, h, ch, px = read_png(SRC)
 bg = (px[0], px[1], px[2], 255)
 s = max(w, h)
 canvas = bytearray()
