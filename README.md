@@ -1,6 +1,4 @@
-# Copiste
-
-<img src="Artwork/copiste-logo.png" alt="Copiste feather logo" width="160">
+# <img src="Artwork/copiste-logo.png" alt="" width="38"> Copiste
 
 Turn an image on your clipboard into text, on demand, entirely on device.
 
